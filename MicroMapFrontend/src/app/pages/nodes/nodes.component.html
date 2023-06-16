@@ -17,12 +17,12 @@
       <span>An error occured While Exporting the nodes ... Check connection</span>
     </div>
     <div class="card text-center">
-      <div class="card-header" style="text-align: left;">
-        <h4 class="card-title" style="display: inline-block;">List of All Available Nodes</h4>
-        <span style="margin-left: 50%;">
-          <button *ngIf="isAdmin" style="width: 200px; margin-right: 25px; " (click)="exportNodes()">export Nodes</button>
-          <button  *ngIf="isAdmin" style="width: 200px;background-color: #ef8157;" (click)="deleteAllModel()">Delete All Nodes</button>
-        </span>
+      <div class="card-header" style="text-align: left; display: grid; grid-template-columns: 1fr auto;">
+        <h4 class="card-title" style="margin-right: 25px;">List of All Available Nodes</h4>
+        <div style="display: flex; justify-content: flex-end;">
+          <button *ngIf="isAdmin" style="width: 200px; margin-right: 10px;">Export Nodes</button>
+          <button *ngIf="isAdmin" style="width: 200px; background-color: #ef8157;">Delete All Nodes</button>
+        </div>
       </div>
       <div class="card-body">
         <div class="table">

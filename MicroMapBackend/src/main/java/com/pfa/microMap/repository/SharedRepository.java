@@ -57,11 +57,21 @@ public interface SharedRepository extends Neo4jRepository<MyNode, String> {
   public void deleteAllCalls();
 
   @Query("UNWIND $calls AS call " +
-    "MATCH (a:MyNode), (b:MyNode) " +
-    "WHERE a.name = call.startNode AND b.name = call.endNode " +
-    "CREATE (a)-[r:CALLS]->(b) " +
-    "SET r.id = ID(r), r.type = call.type, r.topic = call.topic, r.eventProduced = call.eventProduced, " +
-    "r.api = call.api, r.description = call.description "
+    "MERGE (a:MyNode { name: call.startNode }) " +
+    "MERGE (b:MyNode { name: call.endNode }) " +
+    "WITH call, a, b " +
+    "OPTIONAL MATCH (a)-[r:CALLS]->(b) " +
+    "WHERE r.type = call.type " +
+    "FOREACH (ignore IN CASE WHEN r IS NULL THEN [1] ELSE [] END | " +
+    "  CREATE (a)-[newR:CALLS]->(b) " +
+    "  SET newR.id = ID(newR), newR.type = call.type, newR.topic = call.topic, " +
+    "  newR.eventProduced = call.eventProduced, newR.api = call.api, " +
+    "  newR.description = call.description " +
+    ") " +
+    "FOREACH (ignore IN CASE WHEN r IS NOT NULL THEN [1] ELSE [] END | " +
+    "  SET r.id = ID(r), r.topic = call.topic, r.eventProduced = call.eventProduced, " +
+    "  r.api = call.api, r.description = call.description " +
+    ")"
   )
   void addCalls(@Param("calls") List<Map<String, Object>> calls);
 

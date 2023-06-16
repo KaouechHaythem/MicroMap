@@ -28,7 +28,7 @@ export class CallsService {
     return this.http.delete<void>(`${this.apiServerUrl}/call/delete`);
 }
   public getAllCalls():Observable<Call[]> {
-    console.log(this.keycloakService.getToken());
+  
     return this.http.get<Call[]>(`${this.apiServerUrl}/call/getall`);
 }
 

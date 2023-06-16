@@ -8,7 +8,9 @@ export function initializeKeycloak(keycloak: KeycloakService) {
         config: {
           url: environment.keycloakUrl,
           realm: environment.realm,
-          clientId: environment.clientId
+          clientId: environment.clientId,
+          
+
           
         },
         
