@@ -20,8 +20,8 @@
       <div class="card-header" style="text-align: left; display: grid; grid-template-columns: 1fr auto;">
         <h4 class="card-title" style="margin-right: 25px;">List of All Available Nodes</h4>
         <div style="display: flex; justify-content: flex-end;">
-          <button *ngIf="isAdmin" style="width: 200px; margin-right: 10px;">Export Nodes</button>
-          <button *ngIf="isAdmin" style="width: 200px; background-color: #ef8157;">Delete All Nodes</button>
+          <button *ngIf="isAdmin" style="width: 200px; margin-right: 10px;" (click)="exportNodes()">Export Nodes</button>
+          <button *ngIf="isAdmin" style="width: 200px; background-color: #ef8157;" (click)="deleteAllModel()">Delete All Nodes</button>
         </div>
       </div>
       <div class="card-body">

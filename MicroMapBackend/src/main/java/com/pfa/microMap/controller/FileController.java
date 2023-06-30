@@ -7,6 +7,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,6 +22,7 @@ public class FileController {
   private FileService fileService;
 
   @PostMapping("/insert/calls")
+  @PreAuthorize("hasRole('client_admin')")
   public ResponseEntity<?> insertExcelFileCalls(@RequestPart("file") MultipartFile file) {
     try {
 
@@ -36,6 +38,7 @@ public class FileController {
   }
 
   @PostMapping("/insert/nodes")
+  @PreAuthorize("hasRole('client_admin')")
   public ResponseEntity<?> insertExcelFileNodes(@RequestPart("file") MultipartFile file) {
     try {
 
@@ -49,6 +52,7 @@ public class FileController {
   }
 
   @GetMapping(value = "/download/call", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+  @PreAuthorize("hasRole('client_admin')")
   public ResponseEntity<?> exportCallsToExcel(HttpServletResponse response) {
     try {
       String fileName = "calls-" + LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + ".xlsx";
@@ -69,6 +73,7 @@ public class FileController {
   }
 
   @GetMapping(value = "/download/node", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+  @PreAuthorize("hasRole('client_admin')")
   public ResponseEntity<?> exportNodesToExcel(HttpServletResponse response) {
     try {
       String fileName = "nodes-" + LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + ".xlsx";

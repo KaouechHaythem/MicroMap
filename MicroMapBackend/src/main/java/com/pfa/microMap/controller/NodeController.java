@@ -3,6 +3,7 @@ package com.pfa.microMap.controller;
 import com.pfa.microMap.model.MyNode;
 import com.pfa.microMap.service.NodeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,6 +33,7 @@ public class NodeController {
   }
 
   @PostMapping
+  @PreAuthorize("hasRole('client_admin')")
   public MyNode add(@RequestPart("name") String name,
                     @RequestPart(value = "type") String type
 
@@ -40,11 +42,13 @@ public class NodeController {
   }
 
   @DeleteMapping("/delete/{name}")
+  @PreAuthorize("hasRole('client_admin')")
   public void delete(@PathVariable String name) {
     this.nodeService.delete(name);
   }
 
   @DeleteMapping("/delete")
+  @PreAuthorize("hasRole('client_admin')")
   public void deleteAll() {
     this.nodeService.deleteAll();
   }

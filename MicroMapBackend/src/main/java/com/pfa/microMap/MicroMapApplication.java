@@ -16,9 +16,9 @@ public class MicroMapApplication {
   @Value("${frontend}")
   private String frontEnd;
 
-    public static void main(String[] args) {
-        SpringApplication.run(MicroMapApplication.class, args);
-    }
+  public static void main(String[] args) {
+    SpringApplication.run(MicroMapApplication.class, args);
+  }
 
   @Bean
   public CorsFilter corsFilter() {

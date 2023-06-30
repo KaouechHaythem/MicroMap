@@ -79,7 +79,7 @@ public interface SharedRepository extends Neo4jRepository<MyNode, String> {
     "UNWIND $calls AS call " +
       "OPTIONAL MATCH (a:MyNode {name: call.startNode}) " +
       "OPTIONAL MATCH (b:MyNode {name: call.endNode}) " +
-      "WITH call, a, b "+
+      "WITH call, a, b " +
       "WHERE a IS NULL OR b IS NULL " +
       "RETURN call.startNode + ' -> ' + call.endNode AS unmatchedNodes"
   )
