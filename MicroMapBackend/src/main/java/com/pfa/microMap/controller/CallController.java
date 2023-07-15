@@ -14,13 +14,13 @@ public class CallController {
   @Autowired
   CallService callService;
 
-  @GetMapping("/getall")
+  @GetMapping()
 
   public List<Call> findAllCalls() {
     return this.callService.findAllCalls();
   }
 
-  @PostMapping("add")
+  @PostMapping()
   @PreAuthorize("hasRole('client_admin')")
   public Call addCall(
     @RequestPart("startNode") String startNode,
@@ -33,7 +33,7 @@ public class CallController {
     return this.callService.addCall(startNode, endNode, type, topic, eventProduced, api, description);
   }
 
-  @PutMapping("/update/{id}")
+  @PutMapping("/{id}")
   @PreAuthorize("hasRole('client_admin')")
   public Call updateCall(@PathVariable("id") Long id,
                          @RequestPart(value = "type", required = false) String type,
@@ -44,13 +44,13 @@ public class CallController {
     return this.callService.updateCall(id, type, topic, eventProduced, api, description);
   }
 
-  @DeleteMapping("/delete/{id}")
+  @DeleteMapping("/{id}")
   @PreAuthorize("hasRole('client_admin')")
   public void deleteCall(@PathVariable Long id) {
     this.callService.deleteCall(id);
   }
 
-  @DeleteMapping("/delete")
+  @DeleteMapping()
   @PreAuthorize("hasRole('client_admin')")
   public void deleteAllCalls() {
     this.callService.deleteAllCalls();

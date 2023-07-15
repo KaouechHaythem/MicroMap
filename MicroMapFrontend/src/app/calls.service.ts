@@ -16,20 +16,20 @@ export class CallsService {
   
   updateCall(id: number, formData:FormData) :Observable<void>{
     
-    return this.http.put<void>(`${this.apiServerUrl}/call/update/${id}`,formData);
+    return this.http.put<void>(`${this.apiServerUrl}/call/${id}`,formData);
   }
   addCall(formData: FormData) :Observable<Call> {
-    return this.http.post<Call>(`${this.apiServerUrl}/call/add`,formData);
+    return this.http.post<Call>(`${this.apiServerUrl}/call`,formData);
   }
   deleteCall(id: string) :Observable<void> {
-      return this.http.delete<void>(`${this.apiServerUrl}/call/delete/${id}`);
+      return this.http.delete<void>(`${this.apiServerUrl}/call/${id}`);
   }
   deleteAll() :Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/call/delete`);
+    return this.http.delete<void>(`${this.apiServerUrl}/call`);
 }
   public getAllCalls():Observable<Call[]> {
   
-    return this.http.get<Call[]>(`${this.apiServerUrl}/call/getall`);
+    return this.http.get<Call[]>(`${this.apiServerUrl}/call`);
 }
 
 

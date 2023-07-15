@@ -41,13 +41,13 @@ public class NodeController {
     return this.nodeService.add(name, type);
   }
 
-  @DeleteMapping("/delete/{name}")
+  @DeleteMapping("/{name}")
   @PreAuthorize("hasRole('client_admin')")
   public void delete(@PathVariable String name) {
     this.nodeService.delete(name);
   }
 
-  @DeleteMapping("/delete")
+  @DeleteMapping()
   @PreAuthorize("hasRole('client_admin')")
   public void deleteAll() {
     this.nodeService.deleteAll();
